@@ -380,7 +380,154 @@ void f_pointer()
     const char* p_message{ "Hello World" };
     std::cout << "Array of characters can be assigned to a const pointer." << std::endl;
     std::cout << "const char* p_message =" << p_message << std::endl;
-      
+
+    /*
+    * Memory Management Unit is divided into 4 parts:
+    * 1.Text: Holds the binary data
+    * 2.Data:
+    * 3.Heap: Memory of this portion can be dynamically allocated by the developer by using pointer(new,delete) and this memeory is finite.
+    * 4.Stack:Memory of this portion can't be dynamically allocated by the developer, rather controlled by scope mechanism and this memeory is finite.
+    * e.g:
+    *       int main()
+    *       {
+    *           {                               //scope-start
+    *               int local_var{20};          //get demolished after going out of this stack.
+    *               int* local_ptr_var=new int; //it's stored in the heap, and don't get deleted after getting out of stack, and can be accessed from out of scope.
+    *           }
+    *       }
+    * 
+    * local_ptr_var will be deleted only when
+    * we delete and assign a nullptr to that pointer
+    * otherwise it'll make error or the value stored in that pointer address may affect.
+    * PLEASE don't delete twice a memory, bad things can be happened (dangling pointer)
+    *           
+    */
+
+    /*
+    * Don't assign the memory address(like 0x982/055/45) manually to a pointer, 
+    * cause we don't know what is stored on that address previously.Thats why we need to assign address dynamically.
+    * initialize a pointer with "nullptr" and use "new" int/float/double to allocate that size of memory, then assign value to that pointer
+    * or just use new int/float/double(val)
+    */
+    int* p{};   //we are now allocating memory of heap, not stack [without nullptr, it also works]
+    p = new int{};
+    *p = 20;            //this 3 lines ca be written in a single line int* p{ new int{20} }
+
+    //int* p{ new int{20} };
+
+    std::cout << "Value of *p = " << *p << " address of *p = " << p << std::endl;
+
+    //delete this address from heap by using delete and nullptr
+    delete p;
+    p = nullptr;
+
+    /*
+    * 3 types dangling pointer:
+    *    1. Uninitialized pointer [just declaration, not using any nullptr/ new int()/ {}]
+    *    2. deleted pointer       [using a pointer, that is deleted already]
+    *    3. address that is used by multiple pointer [ int* p1{int new(20)}; int p2{p1}; delete p1; cout<<*p2; ]
+    *                                                  //here p2 pointing to p1, which is printing after after deleting p1, but
+    *                                                  // which makes p2 a dangling pointer
+    * 
+    * Solution to dangling pointer:
+    *   1. Uninitialized pointer: always initialize and before using any pointer just make sure that is not nullptr/or assigned a value
+    *   2. deleted pointer:       always assign nullptr after deleting a pointer and check weather it's nullptr, before using it
+    *   3. multiple pointer pointing to a same address: make sure which is master pointer and which are slave.
+    *                                                   don't just delete the mater pointer
+    * 
+    * mainly checking condition wheather a pointer is nullptr/not using
+    */
+
+    int lim{ 100000000 };
+    /*for (size_t i{0}; i <= lim; ++i)
+    {
+        try
+        {
+            int* data = new int[lim];
+        }
+        catch (const std::exception& ex)
+        {
+            std::cout << " Some thing went wrong : " << ex.what() << std::endl;
+        }
+    }*/
+
+    /*for (size_t i{0}; i <= lim; ++i)
+    {
+        int* data = new(std::nothrow) int[lim];// if new fail, nullptr is set 
+        if (data != nullptr)
+        {
+            std::cout << "Data Allocated!\n";
+        }
+        else
+        {
+            std::cout << "Data allocation failed!\n";
+        }
+    }*/
+
+    //null pointer safety: is something to avoid crushing/BAD erros, like- dangling pointer etc
+    // checking if the pointer is nullptr before using and after deleting a pointer
+    int* p_number{};
+    
+    //p_number = new int(7);
+    if (p_number != nullptr)
+    {
+        std::cout << "points to a VALID address : " << p_number << std::endl;
+        std::cout << "*p_number = " << *(p_number) << std::endl; 
+    }
+    else
+    {
+        std::cout << "Points to an invalid address\n";
+    }
+    
+    delete p_number;
+    if (p_number != nullptr)
+    {
+        p_number = nullptr;
+        std::cout << "Deletion compelete\n";
+    }
+
+    //Memory Leak(double allocation witout deletion the prior address
+    int* p_leak{ new int(90) };
+    int var_MLeak{ 100 };
+    p_leak = &var_MLeak; //memory of 90 here priorly pointed by p_leak has been leaked after reassign 100
+                         // OS also thinks that 90 is in use
+    {
+        int* p_scope{ new int(67) }; //memory leaks
+                                    //after this scope, the local variable 67'a address get lost(as it's in stack)
+                                    //but the pointer don't dieand we can't access p_scope
+    }
+
+    //Dynamic Array
+    size_t size{ 10 };
+    double* p_salaries{ new double[size] }; //array witout initilization
+    int* p_student{ new(std::nothrow) int[size] {} };// array initialized with 0 to each
+    double* p_scores{ new(std::nothrow) double[size] { 1,2,3,4,5} };// array initialized with 5 elements, others zero
+
+
+    if (p_scores != nullptr)
+    {
+        for (size_t i{ 0 }; i < size; ++i)
+        {
+            std::cout << "Value : " << p_scores[i] << " : " << *(p_scores + i) << std::endl;
+        }
+    }
+    else
+    {
+        std::cout << "p_salaries not allocated!";
+    }
+
+    /*for (auto score : p_scores) range based for loops don't works with dynamically allocated array
+    {
+
+    }*/
+    delete[] p_salaries;
+    p_salaries = nullptr;
+
+    delete[] p_student;
+    p_student = nullptr;
+
+    delete[] p_scores;
+    p_scores = nullptr;
     std::cout << std::endl << "------------------------------" << std::endl;
 }
 int main()
