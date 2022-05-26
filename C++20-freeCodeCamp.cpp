@@ -588,6 +588,79 @@ void f_reference()
 
     std::cout << std::endl << "------------------------------" << std::endl;
 }
+void f_character_manip()
+{
+    std::cout << std::endl << "------------------------------" << std::endl;
+    std::cout << "f_character_manip(): " << std::endl;
+    
+    //alphaneumeric-- (isalnum)
+    std::cout << "Alphaneumeric : \n";
+    std::cout << "C is alphaneumeric : " << (std::isalnum('C') != 0) << std::endl;
+    std::cout << "7 is alphaneumeric : " << (std::isalnum('7') !=0) << std::endl;
+    std::cout << "^ is alphaneumeric : " << (std::isalnum('^') != 0) << std::endl;
+    
+    //alphabetic-- (isalpha)
+    std::cout << "\n\nAlphabetic : \n";
+    std::cout << "C is alphabetic : " << (std::isalpha('C') != 0) << std::endl;
+    std::cout << "* is alphabetic : " << (std::isalpha('*') != 0) << std::endl;
+    std::cout << "7 is alphabetic : " << (std::isalpha('7') != 0) << std::endl;
+
+    //digit-- (isdigit)
+    std::cout << "\n\isdigit : \n";
+    std::cout << "C is isdigit : " << (std::isdigit('C') != 0) << std::endl;
+    std::cout << "* is isdigit : " << (std::isdigit('*') != 0) << std::endl;
+    std::cout << "7 is isdigit : " << (std::isdigit('7') != 0) << std::endl;
+
+    //isblank
+    std::cout << "\n\nBlank character : \n";
+    char message[] {"Hello there, I am working with character manipulation."};
+    std::cout << "message:-" << message << std::endl;
+
+    int blank_char{};
+    for (size_t i{ 0 }; i < std::size(message); ++i)
+    {
+        if (std::isblank(message[i]))
+        {
+            std::cout << "Founded Blank character at index : [" << i << "]" << std::endl;
+            ++blank_char;
+        }
+    }
+    std::cout << "Total Blank character : " << blank_char << std::endl;
+
+    //islower && isupper
+    std::cout << "\n\nUpper and Lower Character Count : \n";
+    int lower_char{}, upper_char{};
+    for (size_t i{ 0 }; i < std::size(message); ++i)
+    {
+        if (std::islower(message[i]))
+        {
+            //std::cout << "Founded Blank character at index : [" << i << "]" << std::endl;
+            ++lower_char;
+        }
+        if (std::isupper(message[i]))
+        {
+            ++upper_char;
+        }
+    }
+    std::cout << "Total Lower characters : " << lower_char << std::endl;
+    std::cout << "Total Upper characters : " << upper_char << std::endl;
+    
+
+    //converting to upper and lower
+    std::cout << "\n\nConverting all the lower to uppercase : \n";
+    for (size_t i{ 0 }; i < std::size(message); ++i)
+    {
+        if (std::islower(message[i]))
+        {
+            //std::cout << "Founded Blank character at index : [" << i << "]" << std::endl;
+            message[i] = std::toupper(message[i]);
+        }
+    }
+
+    std::cout << "After all upper : " << std::endl;
+    std::cout << message << std::endl;
+    std::cout << std::endl << "------------------------------" << std::endl;
+}
 int main()
 {
     //chapter-2
@@ -626,6 +699,9 @@ int main()
 
     //chapter9
     f_reference();
+
+    //chapter-10
+    f_character_manip();
 
     return 0; //this returning zero send the OS a message that, no error occured and main function worked successfully.
 }
