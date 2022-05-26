@@ -2,6 +2,7 @@
 #include<string>
 #include<iomanip>
 #include<limits>
+#include<cstring>
 void f_printHello()
 {
     std::cout << "------------------------------" << std::endl;
@@ -613,7 +614,7 @@ void f_character_manip()
 
     //isblank
     std::cout << "\n\nBlank character : \n";
-    char message[] {"Hello there, I am working with character manipulation."};
+    char message[]{"Hello there, I am working with character manipulation."};
     std::cout << "message:-" << message << std::endl;
 
     int blank_char{};
@@ -661,6 +662,118 @@ void f_character_manip()
     std::cout << message << std::endl;
     std::cout << std::endl << "------------------------------" << std::endl;
 }
+void f_C_StringManip()
+{
+    std::cout << std::endl << "------------------------------" << std::endl;
+    std::cout << "f_C_StringManip(): " << std::endl;
+    //length of the string
+    //sizeof() : provides the size of the array, counts the null char; but with pointer, it just points to the first pointer
+    //strlen(): provides the length without null character
+    std::cout << "String length : \n";
+    const char message1[]{ "This is message with array." };
+    const char* message2 { "This is message with pointer." };
+    std::cout << "message1 = " << message1 << "\nmesage2 = " << message2 << std::endl;
+    std::cout << "strlen(message1) = " << strlen(message1) << " || sizeof(message1) = " << sizeof(message1) << std::endl;
+    std::cout << "strlen(message2) = " << strlen(message2) << " || sizeof(message2) = " << sizeof(message2) << std::endl;
+
+    //string comparison
+    //strcmp(str1, str2): 0 - equal, negative - str1>str2, positive - str1<str2
+    
+    char str1[]{ "Alabama" };
+    char str2[]{ "Blabama" };
+    std::cout << "strcmp(" << str1 << "," << str2 << ") = " << strcmp(str1, str2) << std::endl;
+    (strcmp(str1, str2)) == 0 ? (std::cout << str1 << " == " << str2 <<"\n") :( (strcmp(str1, str2)) < 0 ? (std::cout << str1 << " < " << str2 << "\n"):(std::cout << str1 << " > " << str2 << "\n"));
+
+    //strncmp(str1,str2,n)
+    //n here means to compare first n characters
+    char str3[]{ "Alabama1" };
+    char str4[]{ "Alabama" };
+    size_t n{ 8 };
+    std::cout << "strncmp(" << str3 << "," << str4 << ","<<n<<") = " << strncmp(str3, str4, n) << std::endl;
+    
+    //character find in a string
+    //strchr(result,target): returns nullptr if the target is not found, 
+    //                       otherwise returns a pointer, where there is the target has been started
+    //                       and print the rest of the string where the target has been started
+    //WRNING!!!!!!!!!! : must check nullptr before use it, oterwise may get crushed
+
+    //char str[]{ "Try not. Do, or do not. There is no try." };
+    const char* p_str{"Try not. Do, or do not. There is no try."};// here p_str is being assigned a const string, which is not stored anywhere, thats why,p_str should be constant, but if we saved it in any var, then no need of const pointer
+    char target = 'T';
+    const char* result = p_str; // assigning the p_str, because, we don't wanna manipulate the main string
+    size_t itr{};
+
+    //std::cout << "Searcing 'Q' in Md Fakrul Islam Taraque :  " << (strchr("Md Fakrul Islam Taraque", 'Q')) << std::endl;
+
+    while ((result = std::strchr(result, target)) != nullptr)
+    {
+        std::cout << "Found '" << target
+            << "' starting at '" << result << "'\n";
+        ++result; //witout increamenting , we will repeatedly get the same string in a infinite loop
+        ++itr;
+    }
+    std::cout << "Iterations : " << itr << std::endl;
+
+    //strrchr() finds out the last pointer to the target
+    char input[]{ "home/user/hello.cpp" };
+    char* output = std::strrchr(input, '/');
+    if (output != nullptr)
+        std::cout << output+1 << std::endl;
+    std::cout << std::endl << "------------------------------" << std::endl;
+}
+void f_C_str_Concate_Copy() 
+{
+    std::cout << std::endl << "------------------------------" << std::endl;
+    std::cout << "f_C_str_Concate_Copy() : \n";
+    std::cout << "Joining string: \n";
+    char dest[50]{ "Hello" };
+    char src[]{ "world!" };
+
+    //strcat(dest,src): join the src after dest
+    //gives error, as compiler treats it as usafe, reather use the same adding '_s'
+    strcat_s(dest, src);
+    strcat_s(dest, "Goodbye world!");
+    std::cout << "strcat_s(dest, src) --> dest: " << dest << std::endl;
+
+    //strncat(dest,src,n): join the first n characters of src after dest
+    //gives error, as compiler treats it as usafe, reather use the same adding '_s'
+    char dest2[50]{ "Hello" };
+    char src2[]{ "world!" };
+    strncat_s(dest2, src2,2);
+    strncat_s(dest2, "Goodbye world!",3);
+    std::cout << "strncat_s(dest2, \"Goodbye world!\",3) -->dest: " << dest2 << std::endl;
+
+    //strcpy(dest,src): copy src to dest
+    //gives error, as compiler treats it as usafe, reather use the same adding '_s'
+    //const char* src3{ "C++ is a multipurpose programming language." };
+    char src3[]{ "C++ is a multipurpose programming language." };
+    //char* dest3{ new char[std::strlen(src3)+10]};
+    char dest3[100]{};
+    strcpy_s(dest3, src3);
+    std::cout << "sizeof(dest3):" << sizeof(dest3) << std::endl;
+    std::cout << "std::strlen(dest3): " << std::strlen(dest3) << std::endl;
+    std::cout << "dest3: " << dest3 << std::endl;
+    std::cout << std::endl << "------------------------------" << std::endl;
+
+}
+void f_string()
+{
+    std::cout << std::endl << "------------------------------" << std::endl;
+    std::cout << "f_string(): " << std::endl;
+    std::string long_str{ "Earth, where the sky is blue, but in Vormir, the sky is pink and nat and gamora died there for sole stone." };
+    std::string msg1("Hello World", 5);
+    std::string msg2(4, 'e');
+    std::string msg3{ long_str,7,10 }; // initialized at index 6 and takes 10 characters
+
+    std::cout << "long_str = " << long_str << std::endl;
+    std::cout << "msg1(\"Hello World\",5) = "<< msg1 << std::endl;
+    std::cout << "msg2((4, 'e')= " << msg2 << std::endl;
+    std::cout << "msg3{ long_str,7,10 } =" << msg3 << std::endl;
+
+
+
+    std::cout << std::endl << "------------------------------" << std::endl;
+}
 int main()
 {
     //chapter-2
@@ -702,6 +815,9 @@ int main()
 
     //chapter-10
     f_character_manip();
+    f_C_StringManip();
+    f_C_str_Concate_Copy();
+    f_string();
 
     return 0; //this returning zero send the OS a message that, no error occured and main function worked successfully.
 }
