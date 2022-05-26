@@ -530,6 +530,64 @@ void f_pointer()
     p_scores = nullptr;
     std::cout << std::endl << "------------------------------" << std::endl;
 }
+void f_reference()
+{
+    std::cout << std::endl << "------------------------------" << std::endl;
+    std::cout << "f_reference(): " << std::endl;
+    int int_val{ 45 };
+    double double_val{ 33.45 };
+
+    //reference must be initialized, otherwise error
+    int& reference_to_int1{ int_val };
+    int& reference_to_int2 = int_val;
+    double& refererence_to_double1{ double_val };
+
+    //don't need the deference operator to print reference like pointer
+    std::cout << "Before Change : \n";
+    std::cout << "int_val = " << int_val << " ||reference_to_int1 = " << reference_to_int1 << " || reference_to_int2 = " << reference_to_int2 << std::endl;
+    std::cout << "double_val = " << double_val << " || refererence_to_double1 = " << refererence_to_double1 << std::endl;
+
+    std::cout << "&int_val = " << &int_val << " || &reference_to_int1 = " << &reference_to_int1 << std::endl;
+    std::cout << "&double_val = " << &double_val << " || &refererence_to_double1 = " << &refererence_to_double1 << std::endl << std::endl;
+
+    reference_to_int1 = 40;
+    double_val = 43.45;
+
+    std::cout << "\nAfter Change : \n";
+    std::cout << "int_val = " << int_val << " ||reference_to_int1 = " << reference_to_int1 << " || reference_to_int2 = " << reference_to_int2 << std::endl;
+    std::cout << "double_val = " << double_val << " || refererence_to_double1 = " << refererence_to_double1 << std::endl;
+
+    //double changed_var = 30.456;
+    //reference can be reassigned but the address it was holding initially, that doesn't get changed
+    //and the value it is reassigned, it just get reflected into the initialzed variable
+    std::cout << "\n\nafter 'reference_to_int1 = double_val' : \n";
+    reference_to_int1 = double_val;
+    std::cout << "double_val = " << double_val << " || int_val = " << int_val << " || reference_to_int1 = " << reference_to_int1 << " || &reference_to_int1 = " << &reference_to_int1 << " || &double_var = " << &double_val << std::endl;
+
+
+    //as changing in reference with other value make no sense or logical error, we need to declare it as const
+    int int_var3{ 68 };
+    const int& const_ref{ int_var3 };
+    std::cout << "\n\nConst_reference : \n";
+    std::cout << "int_var3 = " << int_var3 << " || &int_var3 = " << &int_var3 << " || const_ref = " << const_ref << " || &const_ref = " << &const_ref << std::endl;
+    
+    //const_ref = 90; // makes error
+
+
+    std::cout << "\n\nConst_reference after changing the referred variable : \n";
+    //const int& const const_ref_const_val{ int_var3 };
+    int_var3++;
+    std::cout << "int_var3 = " << int_var3 << " || &int_var3 = " << &int_var3 << " || const_ref = " << const_ref << " || &const_ref = " << &const_ref << std::endl;
+
+    //const reference to const value makes it so secured
+   //int int_var4{ 68 };
+    const int const_var{ 68 };
+    const int& const_ref_const_var{ const_var };
+    std::cout << "\n\nCOnst reference, const value : \n\n";
+    std::cout << "const_var = " << const_var << " || &const_var = " << &const_var << " || const_ref_const_var = " << const_ref_const_var << " || &const_ref_const_var = " << &const_ref_const_var << std::endl;
+
+    std::cout << std::endl << "------------------------------" << std::endl;
+}
 int main()
 {
     //chapter-2
@@ -562,9 +620,12 @@ int main()
 
     //chapter7
     f_charArray();
+
+    //chapter8
     f_pointer();
 
-    //
+    //chapter9
+    f_reference();
 
     return 0; //this returning zero send the OS a message that, no error occured and main function worked successfully.
 }
