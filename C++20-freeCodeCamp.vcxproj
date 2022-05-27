@@ -140,6 +140,12 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="C++20-freeCodeCamp.cpp" />
+    <ClCompile Include="comparison.cpp" />
+    <ClCompile Include="math_operation.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="comparison.h" />
+    <ClInclude Include="math_operation.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

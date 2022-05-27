@@ -3,6 +3,11 @@
 #include<iomanip>
 #include<limits>
 #include<cstring>
+#include "comparison.h"
+#include "math_operation.h"
+void say_age_PV(int age);
+void say_age_PP(int* age);
+void say_age_PR(int& age);
 void f_printHello()
 {
     std::cout << "------------------------------" << std::endl;
@@ -769,11 +774,244 @@ void f_string()
     std::cout << "msg1(\"Hello World\",5) = "<< msg1 << std::endl;
     std::cout << "msg2((4, 'e')= " << msg2 << std::endl;
     std::cout << "msg3{ long_str,7,10 } =" << msg3 << std::endl;
+    std::cout << std::endl << "------------------------------" << std::endl;
+}
+void f_function()
+{
+    std::cout << std::endl << "------------------------------" << std::endl;
+    std::cout << "f_function(): " << std::endl;
+
+    /*
+    The One Definition Rule
+    (no 2 variable, funciton, class, struct be in same file,
+    but struct/class can be in differetn file under same folder) 
+    */
+
+    //function signature:(function name+params) makes a funciton distinct
+
+    //implicit conversion
+    //provides different types of parameters rather than defined
+    //min(int var1, int var2) , but we are providing here double value
+    
+    //int min = std::min(34.5, 45.6);
+    //std::cout << min << std::endl;
+
+    //Function Declaration and Function Definitions 
+    //( in funciton prototype, we don't need to declare the parameter vaiable name)
+
+    /*
+    * 3 steps to get the executale file : 
+    1.Preprocessing: 1. Preprocessing: Translation Unit(replace the header by it's definition and make a cpp and header file for each header)
+    2.Compilation: (Converts the TU components to binary, i.e Obj File) 
+    3.Linker: ( Links all the object and make it binary executable file)
+    */
+
+    //from different header file
+    //header files contains only the prototypes 
+    //the definition should be in other files named same/different as the header files
+    //here the linker finds the same function from all the cpp files with the name on different files, but the best practise is to make them organized
+    //e.g: here the max function is declared in the comparison.cpp and the min in defined here
+    int mn = get_min(2, 200);
+    int mx = get_max(2, 200);
+    std::cout << "From different header file:\n";
+    std::cout << "max(2,200) = " << mx << " || min(2,200) = " << mn << std::endl;
+
+    int increased_mult = get_increased_mult(20, 30);
+    std::cout << "get_increased_mult(20,30) = " << increased_mult << std::endl;
+
+    //pass by value: address of the variables of mother function and child function 
+    //              are differet and the change of var in child function don't affect
+    //              the mother functoin varibale
+     
+    // pass by pointer: passes the address of the argument and parameter is pointer
+    //                  here the param in funciton makes a different copy of passed address, but makes the change to the main var
+    //                  
+    //pass by reference: passes the reference of the argument and parameter is a reference
+    //                  here the param in funciton makes the same copy of passed address and makes the change to the main var     
+
+    std::cout << "pass by value : \n";
+    int age = 23;
+    std::cout << "Before pass by value funciton -- age:" << age <<" || &age = "<<&age<< std::endl;
+    say_age_PV(age);
+    std::cout << "Before pass by value funciton -- age:" << age <<" || &age = " << &age << std::endl;
+
+    std::cout << "\n\npass by pointer : \n";
+    age = 23;
+    std::cout << "After pass by pointer funciton -- age:" << age << " || &age = " << &age << std::endl;
+    say_age_PP(&age);
+    std::cout << "After pass by pointer funciton -- age:" << age << " || &age = " << &age << std::endl;
 
 
+    std::cout << "\n\npass by reference : \n";
+    age = 23;
+    std::cout << "After pass by reference funciton -- age:" << age << " || &age = " << &age << std::endl;
+    say_age_PR(age);
+    std::cout << "After pass by reference funciton -- age:" << age << " || &age = " << &age << std::endl;
 
     std::cout << std::endl << "------------------------------" << std::endl;
 }
+int max(int a, int b)
+{
+    std::cout << "\nInt Overload Called.\n";
+    return (a > b) ? a : b;
+}
+double max(double a, double b)
+{
+    std::cout << "\nDouble Overload Called.\n";
+    return (a > b) ? a : b;
+}
+std::string max(std::string a, std::string b)
+{
+    std::cout << "\nString Overload Called.\n";
+    return (a > b) ? a : b;
+}
+void f_function_overload()
+{
+    std::cout << std::endl << "------------------------------" << std::endl;
+    std::cout << "f_function_overloading  : " << std::endl;
+    /*2 funcitons are different if 
+    *   1. different function name
+    *   2. different param list
+    *Here to practice Function overloading, we have differentiate the param lists
+    */
+
+    std::cout << "max(20,30):" << max(20, 30) << std::endl;
+    std::cout << "max(20.345,30.345):" << max(20.345, 30.345) << std::endl;
+    std::cout << "max(\"abba\",\"babba\"):" << max("abba", "babba") << std::endl;
+    std::cout << std::endl << "------------------------------" << std::endl;
+}
+void f_lambdaFunction()
+{
+    std::cout << std::endl << "------------------------------" << std::endl;
+    std::cout << "f_lambdaFunction(): " << std::endl;
+    /*
+    * Lambda Function: a mechanism to set up anonymous functions(without names).
+    *                  Once the function is set up, we can give names and call them,
+    *                  Or, we ca get them to do things directly. 
+    * syntex:
+    *        [capture_list](params)->return_type{
+    *             //function body
+    *            };
+    * if we wanna give lambda funciton a name and call it by name, we have to make sure the return type is auto
+    * e.g:
+    *       auto func = [] (param_list) {
+    *                           //function body
+    *                         };
+    * 
+    * if we wanna call a lambda function a without name, we have to append '(arg_list);' after the function
+    * 
+    * [](double a, double b){
+    *       //funciton body
+    *     }(12.1, 5.7);
+    * 
+    */
+    [](double a, double b) {
+        std::cout << a << " + " << b << " = " << a + b << std::endl;
+                 }(12.1, 5.7);
+
+    auto result = [](double a, double b){
+        return a + b;
+    };
+    ;
+    std::cout << 12.1 << " + " << 5.7 << " = " << result(12.1, 5.7) << std::endl;
+    std::cout << 12 << " + " << 5 << " = " << result(12, 5) << std::endl;
+
+    /*
+    * 'capture_list': fetches the outside of the scope variables
+    * e.g:
+    * 
+    *  double a{10};
+    *  double b{20};
+    *  auto func = [a,b](){
+    *   std::cout<<"a + b = "<< a+b<<std::endl;
+    * };
+    * func();
+    * 
+    * now here it acts as 2 ways:
+    *   1. Capture by value: don't affect the outside var and makes different address
+    *   2. Capture by Reference: affect the outside var and works with same address
+    */
+    double a{ 10 };
+    double b{ 20 };
+    std::cout << "with capture list(by Value) : where a = " << a << " && b = " << b << std::endl;
+    auto funcV = [a, b]() {
+        std::cout << "inside -- a + b = " << a + b << std::endl;
+        };
+    funcV();
+    for (int i = 0; i < 5; i++)
+    {
+        std::cout << "\nOutside -- a+b = " << a + b << std::endl;
+        funcV();
+        ++a;
+        ++b;
+    }
+
+    std::cout << "\n\nwith capture list(by reference) : where a = " << a << " && b = " << b << std::endl;
+    auto funcR = [&a, &b]() {
+        std::cout << "inside -- a + b = " << a + b << std::endl;
+    };
+    funcR();
+    for (int i = 0; i < 5; i++)
+    {
+        std::cout << "\nOutside -- a+b = " << a + b << std::endl;
+        funcR();
+        ++a;
+        ++b;
+    }
+    /*
+    * To capture evrything outside the context without mentioning in the capture list
+    * 1. '[=]': catch the outside vairable, don't affect the change outside.
+    * 2. '[&]': catch the outside vairable, affect the change outside.
+    *
+    */
+    int check_out_var = 43;
+    std::cout << "using [=] : " << check_out_var << std::endl;
+    auto fun_all1 = [=]() {
+        std::cout << "Inner value : " << check_out_var << std::endl;
+    };
+
+    for (int i = 0; i < 5; i++)
+    {
+        std::cout << "\nOuter value : " << check_out_var << std::endl;
+        fun_all1();
+        check_out_var++;
+    }
+
+    std::cout << "\n\nusing [&] : " << check_out_var << std::endl;
+    auto fun_all2 = [&]() {
+        std::cout << "Inner value : " << check_out_var << std::endl;
+    };
+
+    for (int i = 0; i < 5; i++)
+    {
+        std::cout << "\nOuter value : " << check_out_var << std::endl;
+        fun_all2();
+        check_out_var++;
+    }
+
+    std::cout << std::endl << "------------------------------" << std::endl;
+}
+void say_age_PV(int age)
+{
+    ++age;
+    std::cout << "From say_age_PV() -- age:" << age << " || &age = " << &age << std::endl;
+}
+void say_age_PP(int* age)
+{
+    ++(*age);
+    std::cout << "From say_age_PP() -- age:" << *age << " || &age = " << &age << std::endl;
+}
+void say_age_PR(int& age)
+{
+    ++age;
+    std::cout << "From say_age_PR() -- age:" << age << " || &age = " << &age << std::endl;
+}
+int get_min(int a, int b)
+{
+    int mn = (a <= b) ? a : b;
+    return mn;
+}
+
 int main()
 {
     //chapter-2
@@ -818,6 +1056,22 @@ int main()
     f_C_StringManip();
     f_C_str_Concate_Copy();
     f_string();
+
+    //chapter-11
+    f_function();
+
+    /*
+    * Chapter-12: Getting Things out of functions
+    --Introduction to getting things out of functions
+    --Input and output parameters (1.using reference, 2. using pointer ; without return, just passing the address)
+    --Returning from functions by value
+    */
+
+    //chapter-13
+    f_function_overload();
+
+    //chapter-14
+    f_lambdaFunction();
 
     return 0; //this returning zero send the OS a message that, no error occured and main function worked successfully.
 }
