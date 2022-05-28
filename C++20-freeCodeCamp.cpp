@@ -1052,7 +1052,7 @@ void f_template()
     * then instead of address, we need the string whole.
     * 
     * In this case, we need to implement the specialization
-    * -- duplicate entry of a template with the same name, just the '<>', don't carry any 'typename' and the type is to be explicitly predefine in the declatation
+    * -- duplicate copy of a template with the same name, just the '<>', don't carry any 'typename' and the type is to be explicitly predefine in the declatation
     */
     const char* g{ "hello" };
     const char* h{ "tarauqe" };
