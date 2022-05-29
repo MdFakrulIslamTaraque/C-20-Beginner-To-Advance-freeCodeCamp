@@ -3,6 +3,10 @@
 #include<iomanip>
 #include<limits>
 #include<cstring>
+#include<concepts>
+#include<type_traits>
+
+//defined header files
 #include "comparison.h"
 #include "math_operation.h"
 void say_age_PV(int age);
@@ -1060,6 +1064,81 @@ void f_template()
 
     std::cout << std::endl << "------------------------------" << std::endl;
 }
+
+//---------------standard built in concepts--------------------------
+//concepts: syntex-1
+template <std::integral T>
+T add(T a,T b) 
+{
+    return a + b;
+}
+//concepts: syntex-2
+/*template <typename T>
+requires std::integral<T>
+T add(T a,T b)
+{
+    return a + b;
+}*/
+//concepts: syntex-3
+/*auto add(std::integral auto a, std::integral auto b)
+{
+    return a + b;
+}*/
+//concepts: syntex-4
+/*template <typename T>
+T add(T a, T b) requires std::integral<T>
+{
+    return a + b;
+}*/
+
+//---------------Custom concepts--------------------------
+
+//building concept
+template <typename T> concept singleConcept = std::is_integral_v<T>;
+//implementing our concept
+template <singleConcept T> 
+T addSingle(T a,T b)
+{
+    return a + b;
+}
+
+template <typename T>
+concept multupleConcept = requires(T a, T b) { a* b; };
+
+template <typename T>
+requires multupleConcept<T>
+T addM(T a, T b)
+{
+    return a + b;
+}
+
+template <typename T> 
+concept Incrementable = requires(T a)
+{
+    a += 1;
+    ++a;
+    a++;
+};
+
+template<typename T>
+requires Incrementable<T>
+T addIncre(T a, T b)
+{
+    return a + b;
+}
+
+void f_concepts()
+{
+    std::cout << std::endl << "------------------------------" << std::endl;
+    std::cout << "f_concepts(): " << std::endl;
+    /*
+    * Concepts: a mechanism to place constraints on template type parameter
+    */
+    int a{ 10 }, b{ 20 };
+    double c{ 10.10 }, d{ 20.20 };
+    std::cout << "add(10,20) = " << add(a, b) << std::endl;
+    std::cout << std::endl << "------------------------------" << std::endl;
+}
 template <typename dType> dType maximum(dType a, dType b)
 {
     return (a >= b) ? a : b;
@@ -1158,6 +1237,9 @@ int main()
 
     //chapter-15
     f_template();
+
+    //chapter-16
+    f_concepts();
 
     return 0; //this returning zero send the OS a message that, no error occured and main function worked successfully.
 }
