@@ -24,12 +24,21 @@
     <ClCompile Include="math_operation.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="cylinder_class.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="comparison.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="math_operation.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="contants.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="cylinder_class.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

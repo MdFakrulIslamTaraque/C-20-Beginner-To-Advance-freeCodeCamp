@@ -142,10 +142,13 @@
   <ItemGroup>
     <ClCompile Include="C++20-freeCodeCamp.cpp" />
     <ClCompile Include="comparison.cpp" />
+    <ClCompile Include="cylinder_class.cpp" />
     <ClCompile Include="math_operation.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="comparison.h" />
+    <ClInclude Include="contants.h" />
+    <ClInclude Include="cylinder_class.h" />
     <ClInclude Include="math_operation.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

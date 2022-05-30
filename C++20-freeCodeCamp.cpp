@@ -9,6 +9,10 @@
 //defined header files
 #include "comparison.h"
 #include "math_operation.h"
+#include "contants.h"
+#include "cylinder_class.h"
+
+
 void say_age_PV(int age);
 void say_age_PP(int* age);
 void say_age_PR(int& age);
@@ -1102,9 +1106,9 @@ T addSingle(T a,T b)
     return a + b;
 }
 
+
 template <typename T>
 concept multupleConcept = requires(T a, T b) { a* b; };
-
 template <typename T>
 requires multupleConcept<T>
 T addM(T a, T b)
@@ -1174,6 +1178,39 @@ int get_min(int a, int b)
     return mn;
 }
 
+
+
+//----------------------------------- chapter-17(Classes)-----------------------
+
+void f_Class()
+{
+    std::cout << std::endl << "------------------------------" << std::endl;
+    /*
+    * member variales can be:
+    *   1.Raw stack varible
+    *   2.pointer
+    **But can't be reference(sad :| )
+    *
+    * class methods have access to the member variables(public,private everything)
+    * 
+    */
+
+    /*
+    * Class Across Multiple Files(constants and classes are defined in single files, with .h notation, it can be included in main.cpp file like other header files)
+    */
+    std::cout << "f_Class(): " << std::endl;
+    C_cylinder cylinder1(2,3);
+    std::cout <<"Radius: "<<cylinder1.get_base_rad()<<" || Height: "<<cylinder1.get_height() << " ==> volume : " << cylinder1.CF_volume() << std::endl;
+
+    cylinder1.set_base_radius(10);
+    cylinder1.set_height(10);
+
+    std::cout << "Radius: " << cylinder1.get_base_rad() << " || Height: " << cylinder1.get_height() << " ==> volume : " << cylinder1.CF_volume() << std::endl;
+    //std::cout << "base_radius : " << cylinder1.base_radius<<" || height : "<<cylinder1.height << std::endl;
+    std::cout << std::endl << "------------------------------" << std::endl;
+}
+
+
 int main()
 {
     //chapter-2
@@ -1240,6 +1277,9 @@ int main()
 
     //chapter-16
     f_concepts();
+
+    //chapter-17
+    f_Class();
 
     return 0; //this returning zero send the OS a message that, no error occured and main function worked successfully.
 }
