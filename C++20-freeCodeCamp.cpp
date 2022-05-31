@@ -11,6 +11,7 @@
 #include "math_operation.h"
 #include "contants.h"
 #include "cylinder_class.h"
+#include "dog_class.h"
 
 
 void say_age_PV(int age);
@@ -1181,11 +1182,26 @@ int get_min(int a, int b)
 
 
 //----------------------------------- chapter-17(Classes)-----------------------
-
+void f_dog_class_cons()
+{
+    C_dog dog1("Jimmy", "Speniol", 2);
+}
+void f_dog_classP()
+{
+    C_dog dog2("Jack", "Shepard", 3);
+}
+void f_test_desc()
+{
+    C_dog dog1("Jerry", "breed-1", 2);
+    C_dog dog2("Jimmy", "breed-2", 3);
+    C_dog dog3("Jacky", "breed-3", 4);
+}
 void f_Class()
 {
     std::cout << std::endl << "------------------------------" << std::endl;
     /*
+    * size of class/object = sum of al the member varable size
+    * the size of int is fixed
     * member variales can be:
     *   1.Raw stack varible
     *   2.pointer
@@ -1207,6 +1223,75 @@ void f_Class()
 
     std::cout << "Radius: " << cylinder1.get_base_rad() << " || Height: " << cylinder1.get_height() << " ==> volume : " << cylinder1.CF_volume() << std::endl;
     //std::cout << "base_radius : " << cylinder1.base_radius<<" || height : "<<cylinder1.height << std::endl;
+    
+    //---------------------------------------
+    /* Arrow pointer call notation:
+    * using pointer to initialize a class makes it dynamic
+    * to access the member methods of a pointer object, we use '->'
+    */
+    C_cylinder* p_cylinder = new C_cylinder(11, 20);
+    std::cout << "(*p_cylinder).CF_volume() = " << (*p_cylinder).CF_volume() << std::endl;
+    std::cout << "p_cylinder->CF_volume() = " << p_cylinder->CF_volume() << std::endl << std::endl;
+    delete p_cylinder;
+
+    /*
+    * destructor is called at the end of completing all the instructors of a scope.
+    */
+
+    //as the constructor is called in the scope of function, destructor is called
+    //at the bottom of that function and then the rest of the lines are executed.
+    //if the class was constructed here, then the destructor will be called after '----'(dashed line) being printed
+    f_dog_class_cons();
+
+
+    //WARNING: don't just pass an object to a function as parameter,
+    //cause after initializing an object in the present scope, passing it to function
+    // create a copy in the function scope,
+    //which leads to call the destructor twice(one in main scope, another in function scope)
+    //and calling delete twice may crush your program, even the system may face problem.
+    std::cout << "After function scope normal.\n";
+
+    /*
+    * When an object of pointer is instantiated in the scope of a function outside of the mother function,
+    * we need to call the "delete class" to get the destructor explicitly (though in Visual studio 2019, that doesn't need) 
+    */
+    f_dog_classP();
+    std::cout << "After function scope pointer.\n";
+
+    /*
+    The constructor declared first, that destructor declared in the last
+    */
+    f_test_desc();
+
+    /*
+    * This pointer used to :
+    *   1. print out current address of the object
+    *   2. resolve conflicts with the same name of function parameter and class member vaariaables
+    *   3. chaained calls using pointers
+    */
+    C_dog thisDog("name-before", "breed-before", 0);
+    thisDog.print_info();
+
+    //mnully this seeting for alll the member functions is cumbersome, tht's why, we need to set the return type as address of the object nd do it in  same line.
+    thisDog.set_name("name-after");
+    thisDog.set_breed("breed-fter");
+    thisDog.set_age(2);
+    thisDog.print_info();
+
+    //chined calls using pointer
+    thisDog.set_name("name-line")->set_breed("breed-line")->set_age(0);
+    thisDog.print_info();
+
+    //chined calls using reference
+    thisDog.set_name2("ref-name").set_breed2("ref-breed").set_age2(2);
+    thisDog.print_info();
+
+    std::cout << std::endl << "----------------struct--------------" << std::endl;
+    /*
+    * difference between struct and class:
+    *  struct member are public by default 
+    * class member are private by default
+    */
     std::cout << std::endl << "------------------------------" << std::endl;
 }
 

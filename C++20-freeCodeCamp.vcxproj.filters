@@ -27,6 +27,9 @@
     <ClCompile Include="cylinder_class.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="dog_class.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="comparison.h">
@@ -39,6 +42,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="cylinder_class.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="dog_class.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
