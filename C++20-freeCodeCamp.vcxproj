@@ -145,6 +145,12 @@
     <ClCompile Include="cylinder_class.cpp" />
     <ClCompile Include="dog_class.cpp" />
     <ClCompile Include="math_operation.cpp" />
+    <ClCompile Include="Person.cpp" />
+    <ClCompile Include="person_class.cpp" />
+    <ClCompile Include="player_person_class.cpp" />
+    <ClCompile Include="Test_Private_Person.cpp" />
+    <ClCompile Include="Test_Protected_Person.cpp" />
+    <ClCompile Include="Test_Public_Person.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="comparison.h" />
@@ -152,6 +158,12 @@
     <ClInclude Include="cylinder_class.h" />
     <ClInclude Include="dog_class.h" />
     <ClInclude Include="math_operation.h" />
+    <ClInclude Include="Person.h" />
+    <ClInclude Include="person_class.h" />
+    <ClInclude Include="player_person_class.h" />
+    <ClInclude Include="Test_Private_Person.h" />
+    <ClInclude Include="Test_Protected_Person.h" />
+    <ClInclude Include="Test_Public_Person.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

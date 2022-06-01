@@ -30,6 +30,24 @@
     <ClCompile Include="dog_class.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="person_class.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="player_person_class.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Person.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Test_Public_Person.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Test_Protected_Person.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Test_Private_Person.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="comparison.h">
@@ -45,6 +63,24 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="dog_class.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="person_class.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="player_person_class.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Person.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Test_Public_Person.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Test_Protected_Person.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Test_Private_Person.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

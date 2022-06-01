@@ -12,7 +12,10 @@
 #include "contants.h"
 #include "cylinder_class.h"
 #include "dog_class.h"
-
+#include "person_class.h"
+#include "player_person_class.h"
+#include "Person.h"
+#include "Test_Private_Person.h"
 
 void say_age_PV(int age);
 void say_age_PP(int* age);
@@ -1201,8 +1204,11 @@ void f_Class()
     std::cout << std::endl << "------------------------------" << std::endl;
     /*
     * size of class/object = sum of al the member varable size
-    * the size of int is fixed
-    * member variales can be:
+    * the size of pointer is fixed*/
+    
+    
+    
+    /* member variales can be:
     *   1.Raw stack varible
     *   2.pointer
     **But can't be reference(sad :| )
@@ -1272,17 +1278,28 @@ void f_Class()
     C_dog thisDog("name-before", "breed-before", 0);
     thisDog.print_info();
 
-    //mnully this seeting for alll the member functions is cumbersome, tht's why, we need to set the return type as address of the object nd do it in  same line.
+    //manully this seting for all the member functions is cumbersome, tht's why, we need to set the return type as address of the object nd do it in  same line.
     thisDog.set_name("name-after");
     thisDog.set_breed("breed-fter");
     thisDog.set_age(2);
     thisDog.print_info();
 
     //chined calls using pointer
+    //process: 1. set the return type of the setters as class pointer(i.e: class_name*)
+    //         2. write the code by class_name.setter1(arg1)->setter2(arg2)->setter3(arg3)...
+    //         3. the arguments are in value, not by pointer/address
+    //         4. set the value of member variabes like: *(this->member) = arg
+    //         5. "return this; form every setter
+
     thisDog.set_name("name-line")->set_breed("breed-line")->set_age(0);
     thisDog.print_info();
 
     //chined calls using reference
+    //process:  1. set the return type of setters as reference(i.e: class_name&)
+    //          2. write the code by class_name.setter1(arg1).setter2(arg2).setter3(arg3)....
+    //          3. the arguments in value, not by pointer/address
+    //          4. set the value of member variabes like: this->member = arg
+    //          5. "return *this;" from every setter
     thisDog.set_name2("ref-name").set_breed2("ref-breed").set_age2(2);
     thisDog.print_info();
 
@@ -1295,6 +1312,40 @@ void f_Class()
     std::cout << std::endl << "------------------------------" << std::endl;
 }
 
+//---------------------------------- chapter-18(inheritance)--------------------
+void f_inhertance()
+{
+    std::cout << std::endl << "------------------------------" << std::endl;
+    std::cout << "f_inhertance(): " << std::endl;
+    /*
+    * inheritance :
+    * 1. Public: derive class and friend class of the derived class, 
+                 can access the public and protected members from its scope, but not outside of the scope, 
+                 can't directly access the private members directly, needs public setter/getters
+          means: all the private, protected, private, remains the same.
+                 
+
+    * 2. Protected: all the public,protected members and functions become protected, but private remains the same
+    * 3. Private:  all the public,protected members and functions become private, private remains the same
+    */
+    C_Person person1("Fakrul-1", "Tareq-1");
+    person1.print_person_info();
+    person1.set_first_name("Fakrul-2").set_last_name("Tareq-2");
+    person1.print_person_info();
+
+    //C_Player player1("Cricket"); //when the member vairbales are private ad we can't access the private members: first_name, last_name
+    C_Player player1("Cricet", "Amartya", "Dip");
+    player1.print_player_info();
+    player1.set_first_name("Dip-1").set_last_name("Das-1"); 
+    player1.print_player_info();
+
+    Person person2("Fakrul Islam", 23, "Kajla, Rajshahi");
+    person2.print_person_info2();
+
+    Test_Private_Person private1();
+    private1.print_Test_private();
+    std::cout << std::endl << "------------------------------" << std::endl;
+}
 
 int main()
 {
@@ -1365,6 +1416,9 @@ int main()
 
     //chapter-17
     f_Class();
+
+    //chapter-18
+    f_inhertance();
 
     return 0; //this returning zero send the OS a message that, no error occured and main function worked successfully.
 }
