@@ -48,6 +48,9 @@
     <ClCompile Include="Test_Private_Person.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="nested_private.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="comparison.h">
@@ -81,6 +84,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Test_Private_Person.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="nested_private.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

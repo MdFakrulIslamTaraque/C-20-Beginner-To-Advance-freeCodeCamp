@@ -1354,6 +1354,15 @@ void f_inhertance()
     Test_Private_Person test_Obj_Private;
     test_Obj_Private.print_Test_private();
 
+    /*
+    * To keep the mother class members indifferent from "private" in derive class(in private inheritance),
+    * code:
+    *       inherit_type:
+    *           using member function; //not the brace
+    * But in this way, we can't make the already private member to other(protected/public)
+    * 
+    * For funciton overloading, just add the function under the access modifier you wanna make it using "using"
+    */
     
     std::cout << std::endl << "------------------------------" << std::endl;
 }

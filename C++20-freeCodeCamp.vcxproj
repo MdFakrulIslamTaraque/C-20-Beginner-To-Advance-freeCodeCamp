@@ -145,6 +145,7 @@
     <ClCompile Include="cylinder_class.cpp" />
     <ClCompile Include="dog_class.cpp" />
     <ClCompile Include="math_operation.cpp" />
+    <ClCompile Include="nested_private.cpp" />
     <ClCompile Include="Person.cpp" />
     <ClCompile Include="person_class.cpp" />
     <ClCompile Include="player_person_class.cpp" />
@@ -157,6 +158,7 @@
     <ClInclude Include="contants.h" />
     <ClInclude Include="cylinder_class.h" />
     <ClInclude Include="dog_class.h" />
+    <ClInclude Include="nested_private.h" />
     <ClInclude Include="math_operation.h" />
     <ClInclude Include="Person.h" />
     <ClInclude Include="person_class.h" />
