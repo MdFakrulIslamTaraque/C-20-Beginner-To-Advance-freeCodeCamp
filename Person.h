@@ -5,11 +5,11 @@
 class Person
 {
 protected:
-	int age{};
+	int age{10};
 private:
-	std::string address{};
+	std::string address{"Address-Person-MOther"};
 public:
-	std::string full_name;
+	std::string full_name{"Name-Person-Mother"};
 
 	Person() = default;
 	Person(const std::string full_name, int age, const std::string address);

@@ -16,6 +16,7 @@
 #include "player_person_class.h"
 #include "Person.h"
 #include "Test_Private_Person.h"
+#include "Test_Protected_Person.h"
 
 void say_age_PV(int age);
 void say_age_PP(int* age);
@@ -1336,14 +1337,24 @@ void f_inhertance()
     //C_Player player1("Cricket"); //when the member vairbales are private ad we can't access the private members: first_name, last_name
     C_Player player1("Cricet", "Amartya", "Dip");
     player1.print_player_info();
-    player1.set_first_name("Dip-1").set_last_name("Das-1"); 
+    player1.set_first_name("Dip-1");
+    player1.set_last_name("Das-1");
     player1.print_player_info();
+
+    player1.set_first_name("Dip-2").set_last_name("Daas-2");
+    player1.print_player_info();
+
 
     Person person2("Fakrul Islam", 23, "Kajla, Rajshahi");
     person2.print_person_info2();
 
-    Test_Private_Person private1();
-    private1.print_Test_private();
+    Test_Protected_Person pro1;
+    pro1.print_Test_Protected();
+
+    Test_Private_Person test_Obj_Private;
+    test_Obj_Private.print_Test_private();
+
+    
     std::cout << std::endl << "------------------------------" << std::endl;
 }
 

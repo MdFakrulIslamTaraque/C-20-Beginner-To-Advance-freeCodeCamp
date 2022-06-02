@@ -14,4 +14,4 @@ public:
 
 };
 
-#endif // !TEST_PROTECTED_H
+#endif // !TEST_PRIVATE_H

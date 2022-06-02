@@ -140,7 +140,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="C++20-freeCodeCamp.cpp" />
+    <ClCompile Include="main.cpp" />
     <ClCompile Include="comparison.cpp" />
     <ClCompile Include="cylinder_class.cpp" />
     <ClCompile Include="dog_class.cpp" />

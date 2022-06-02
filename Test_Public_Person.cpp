@@ -15,5 +15,5 @@ void Test_Public_Person::print_Test_Public()
 
 	  here the private class element 'address' can't be accessed directly, that's why we needed a getter
 	*/
-	std::cout << "Full name form Person(mother class): " << this->full_name << " || age : " << this->age << " || address : " << get_person_address() << std::endl;
+	std::cout << "Full name form Person(mother class): " << this->full_name << " || age : " << this->age << " || address : " << this->get_person_address() << std::endl;
 }

@@ -4,9 +4,9 @@
 #include "Person.h"
 class Test_Protected_Person : protected Person
 {
-	int protected_int1{};
-	int protected_int2{};
-	double protected_double1;
+	int protected_int1{10};
+	int protected_int2{20};
+	double protected_double1{ 10.10 };
 public:
 	Test_Protected_Person() = default;
 	~Test_Protected_Person();
@@ -14,5 +14,5 @@ public:
 
 };
 
-#endif // !TEST_PUBLIC_PERSON_H
+#endif // !TEST_PROTECTED_PERSON_H
 
